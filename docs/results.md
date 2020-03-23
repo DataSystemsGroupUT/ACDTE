@@ -1,23 +1,14 @@
-# ACDTE
-In this repo, we host the repo for the paper ACDTE submitted to ECML 20. The repo contains code used to generate all the results in the paper as well as the visualizations
-
-## Introduction
-ACDTE stands for Automatic Concept based Decision Tree Explanations. It is a framework to help domain expert, with little to no knowledge in machine learning, to be able to understand and trust deep learning models used in image classification. ACDTE only works with CNN used in image classification. Concept based explanations are preferred over saliency maps and other techniques since it offers a higher level of abstraction that provide the user with NLP rule explanations as well as their counterfactuals in terms of semantically meaningful concepts. ACDTE is also very flexible in terms of locality, meaning the user can control how semantically close the concepts used in the explanations are to the instance need to be explained.  
-  
-The pipeline of ACDTE consists of three major stages:
--	Automatic extraction of concepts
-- Concepts linear models
-- Building the decision tree and extracting the explanations
-  
-ACDTE is also modular since any stage can be replaced with alternatives that have the same functionality to allow for more control over the resulting explanations. For example, in stage 1 we can replace the segmentation model used (DeepLab v3+) with a better model or even a super pixel technique such as SLIC for faster performance.  
-The whole pipeline is shown in the next figure  
-  
-![Pipeline](https://i.imgur.com/K5moKJ3.png)  
-  
-We start with image set that is used to extract the concepts from and use [segmentation.ipynb](https://github.com/DataSystemsGroupUT/ACDTE/blob/master/experiments/segmentation.ipynb) to extract the images and masks using DeepLab v3+ segmentation model. We then cache the results for further use. We use the images and masks in all of the other notebooks to extract the segments from the images. We use K means clustering with K depending on the number of segments extracted from the dataset. After that, we filter the clusters formed using some heuristics and build linear regression pipelines that consists of PCA to first reduce the dimensionality followed by logistic regression. These linear models predict whether the corresponding concept is present in a query image or not. We convert the images to concept binary vector which is used in building the decision tree. Finally, we extract rules from the decision tree by following the path from the root to the leaves. We get the NLP labels of the concepts from the segmentation model which provides the segments labels as well. We use the majority label as the name of the concept.  
-  
-## Experiments
+## Experiments Results
 In all experiments, we used a subset of ADE20K dataset to extract concepts from and explain some of its instances. We also used pre-trained DeepLab v3+ model trained on ADE20K with Xception backend. For the model to be explained we used a ResNet50 model pre-trained on Places365 dataset. In order to have a more efficient pipeline, we used [segmentation.ipynb](https://github.com/DataSystemsGroupUT/ACDTE/blob/master/experiments/segmentation.ipynb) to segment the images and cache the images with their masks for further usage in the other experiments. 
+* [Selecting Extraction Layer](#selecting-extraction-layer)
+* [Analyzing Extracted Concepts](#analyzing-extracted-concepts)
+	* [Concepts Meaningfulness](#concepts-meaningfulness)
+	* [Concepts importance](#concepts-importance)
+* [Analyzing Decision Tree Performance](#analyzing-decision-tree-performance)
+	* [Decision Tree Depth](#decision-tree-depth)
+	* [Decision Tree Vs Random Forest](#decision-tree-vs-random-forest)
+* [Counterfactual examples](#counterfactual-examples)
+
 ### Selecting Extraction Layer:
 In this experiment, we select the best intermediate layer to extract the activation feature maps from based on the average accuracy of the linear models on a validation set. This reflects how well the linear models can detect a concept found in the images to be explained. The results can be seen in the next figure ![extraction_layer](https://i.imgur.com/DCd129t.png)  
 It is clear from the accuracy that the linear models can detect the presence and absence of the corresponding concepts. We can also see an increase in the accuracy as the extraction layer is deeper. This behavior can be explained by the way we generate the segments since we use DeepLab v3+ which extracts highly semantic segments and thus the deeper layers are better at making sense of these segments.  
@@ -37,6 +28,7 @@ In this experiment, we validate that different concepts have different importanc
 ![concepts_importance](https://i.imgur.com/S92yXRO.png)  
 The plots show the variable importance of concepts where the behavior of the plot shows that adding important concepts first leads to a faster increase in the fidelity score compared to adding less important concepts first. The same can be observed in the case of removing concepts. The code for this experiment can be found in [concept_importance.ipynb](https://github.com/DataSystemsGroupUT/ACDTE/blob/master/experiments/concept_importance.ipynb).  
 Another version of this experiment can be found in [locality_adding_concepts.ipynb](https://github.com/DataSystemsGroupUT/ACDTE/blob/master/experiments/locality_adding_concepts.ipynb). We do the same adding concepts experiment but with a smaller neighborhood parameter which effectively make the concepts more compact and tightly related to the instance to be explained. The result in this experiment also shows the same behavior.  
+
 ### Analyzing Decision Tree Performance:
 In the next experiments we analyze the performance of the decision tree using the fidelity measure.  
 #### Decision Tree Depth:
