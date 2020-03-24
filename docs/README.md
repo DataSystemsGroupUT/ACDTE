@@ -10,10 +10,4 @@ In this repo, we host the code for the paper ACDTE submitted to ECML 20. The rep
   * [Analyzing Decision Tree Performance](https://datasystemsgrouput.github.io/ACDTE/results#analyzing-decision-tree-performance)
 	* [Decision Tree Depth](https://datasystemsgrouput.github.io/ACDTE/results#decision-tree-depth)
 	* [Decision Tree Vs Random Forest](https://datasystemsgrouput.github.io/ACDTE/results#decision-tree-vs-random-forest)
-<<<<<<< HEAD
   * [Counterfactual examples](https://datasystemsgrouput.github.io/ACDTE/results#counterfactual-examples)
-=======
-  * [Counterfactual examples](https://datasystemsgrouput.github.io/ACDTE/results#counterfactual-examples)
-
-  
->>>>>>> 31edb7d89406afb9c0e00c0da678bb3e10ef2406
