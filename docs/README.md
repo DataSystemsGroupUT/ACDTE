@@ -11,5 +11,3 @@ In this repo, we host the repo for the paper ACDTE submitted to ECML 20. The rep
 	* [Decision Tree Depth](https://datasystemsgrouput.github.io/ACDTE/results#decision-tree-depth)
 	* [Decision Tree Vs Random Forest](https://datasystemsgrouput.github.io/ACDTE/results#decision-tree-vs-random-forest)
   * [Counterfactual examples](https://datasystemsgrouput.github.io/ACDTE/results#counterfactual-examples)
-
-  
