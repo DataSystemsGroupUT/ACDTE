@@ -19,7 +19,8 @@ In this experiment, we show that the concepts extracted are meaningful as well a
 #### Concepts Meaningfulness:
 In the next image we can see some segments of the concept bed as well as the concept mountain the images are obtained by choosing the closest 4 images to the center of the cluster  
 **Concept of a bed**
-![bed](https://i.imgur.com/JCBCOOQ.png)
+![bed](https://i.imgur.com/JCBCOOQ.png)  
+
 **Concept of a mountain**
 ![mountain](https://i.imgur.com/nBFGBQL.png)  
 The images show that the concepts are consistent and are semantically sound. These images can be extracted from the [visualization.ipynb](https://github.com/DataSystemsGroupUT/ACDTE/blob/master/experiments/Visualization.ipynb).  
