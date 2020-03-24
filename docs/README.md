@@ -1,6 +1,6 @@
 ## ACDTE
 
-In this repo, we host the repo for the paper ACDTE submitted to ECML 20. The repo contains code used to generate all the results in the paper as well as the visualizations
+In this repo, we host the code for the paper ACDTE submitted to ECML 20. The repo contains code used to generate all the results in the paper as well as the visualizations
 * [Methodology](https://datasystemsgrouput.github.io/ACDTE/method)
 * [Experiments and Results](https://datasystemsgrouput.github.io/ACDTE/results)
   * [Selecting Extraction Layer](https://datasystemsgrouput.github.io/ACDTE/results#selecting-extraction-layer)
